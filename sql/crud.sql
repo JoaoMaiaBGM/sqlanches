@@ -87,3 +87,29 @@ WHERE
 		FROM clientes c
 		WHERE c.nome = 'Georgia'
 	);
+
+--ATUALIZAÇÃO
+--1)Some os pontos de lealdade da cliente Georgia e faça uma query para atualizar somente os pontos de lealdade dela para o valor somado.
+		--resultado esperado 48
+UPDATE 
+	clientes c 	
+SET 
+	lealdade = (
+		SELECT 
+			sum(p.pts_de_lealdade)
+		FROM 
+			produtos_pedidos pp 
+		JOIN 
+			produtos p ON p.id = pp.produto_id 
+		JOIN 
+			pedidos p2 ON p2.id = pp.pedido_id 
+		JOIN 
+			clientes c ON c.id = p2.cliente_id 
+		WHERE 	
+			pp.pedido_id = (
+				SELECT c.id 
+				FROM clientes c
+				WHERE c.nome = 'Georgia'
+			)
+	)
+	WHERE c.nome = 'Georgia';
