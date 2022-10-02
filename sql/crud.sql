@@ -113,3 +113,10 @@ SET
 			)
 	)
 	WHERE c.nome = 'Georgia';
+
+--DELEÇÃO
+--1)Crie uma query de deleção do usuário Marcelo.
+DELETE FROM 
+	clientes c
+WHERE 
+	c.nome = 'Marcelo';
